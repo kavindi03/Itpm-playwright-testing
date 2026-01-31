@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:ci": "npx playwright test --project=chromium"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kavindi03/-Playwright-project.git"
