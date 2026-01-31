@@ -3,214 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwiftTranslator - Singlish to Sinhala</title>
+    <title>Swift Translator - Singlish to Sinhala</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 0;
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-color: #f5f5f5;
         }
         
         .container {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 40px;
-            max-width: 800px;
-            width: 100%;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
         h1 {
             color: #333;
             text-align: center;
             margin-bottom: 30px;
-            font-size: 2.5em;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .translator-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
         }
         
         .input-section, .output-section {
-            position: relative;
+            margin-bottom: 20px;
         }
         
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-weight: bold;
             color: #555;
-            font-weight: 600;
         }
         
-        textarea {
+        #input-text, #output-text {
             width: 100%;
-            height: 200px;
-            padding: 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
             font-size: 16px;
             resize: vertical;
-            transition: border-color 0.3s ease;
+            min-height: 100px;
             box-sizing: border-box;
         }
         
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
         #output-text {
-            background-color: #f8f9fa;
-            color: #333;
-            font-family: 'Noto Sans Sinhala', 'Arial Unicode MS', sans-serif;
+            background-color: #f9f9f9;
+            border-color: #ccc;
         }
         
-        .button-container {
+        .button-group {
             display: flex;
             gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
+            margin-top: 15px;
         }
         
-        button {
-            padding: 12px 30px;
+        .clear-btn, .copy-btn {
+            padding: 10px 20px;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            transition: background-color 0.3s;
         }
         
         .clear-btn {
-            background: #dc3545;
+            background-color: #e74c3c;
             color: white;
         }
         
         .clear-btn:hover {
-            background: #c82333;
-            transform: translateY(-2px);
+            background-color: #c0392b;
         }
         
         .copy-btn {
-            background: #28a745;
+            background-color: #3498db;
             color: white;
         }
         
         .copy-btn:hover {
-            background: #218838;
-            transform: translateY(-2px);
+            background-color: #2980b9;
         }
         
         .info {
-            text-align: center;
-            color: #666;
             margin-top: 20px;
-            font-size: 14px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            border-radius: 0 5px 5px 0;
         }
         
-        @media (max-width: 768px) {
-            .translator-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .container {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 2em;
-            }
+        .info h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .info ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .info li {
+            margin-bottom: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>SwiftTranslator</h1>
+        <h1>Swift Translator - Singlish to Sinhala</h1>
         
-        <div class="translator-container">
-            <div class="input-section">
-                <label for="input-text">Type in Singlish:</label>
-                <textarea 
-                    id="input-text" 
-                    placeholder="Type Singlish text here..."
-                    autocomplete="off"
-                    spellcheck="false"
-                ></textarea>
-            </div>
-            
-            <div class="output-section">
-                <label for="output-text">Sinhala Translation:</label>
-                <textarea 
-                    id="output-text" 
-                    readonly
-                    placeholder="Translation will appear here..."
-                ></textarea>
-            </div>
+        <div class="input-section">
+            <label for="input-text">Type in Singlish:</label>
+            <textarea id="input-text" placeholder="Type Singlish text here... (e.g., 'oyaata kohomadha?')"></textarea>
         </div>
         
-        <div class="button-container">
-            <button class="clear-btn" onclick="clearText()">Clear</button>
-            <button class="copy-btn" onclick="copyText()">Copy Translation</button>
+        <div class="output-section">
+            <label for="output-text">Sinhala Translation:</label>
+            <textarea id="output-text" readonly placeholder="Sinhala translation will appear here..."></textarea>
+        </div>
+        
+        <div class="button-group">
+            <button class="clear-btn">Clear All</button>
+            <button class="copy-btn">Copy Translation</button>
         </div>
         
         <div class="info">
-            Type in Singlish (Roman script) and see real-time Sinhala translation
+            <h3>How to use:</h3>
+            <ul>
+                <li>Type Singlish text in the input area</li>
+                <li>Translation appears automatically in real-time</li>
+                <li>Click "Clear All" to reset both fields</li>
+                <li>Click "Copy Translation" to copy the Sinhala text</li>
+            </ul>
         </div>
     </div>
 
     <script>
-        // Basic Singlish to Sinhala mapping
+        // Simple Singlish to Sinhala mapping
         const singlishToSinhala = {
-            'a': 'අ', 'aa': 'ආ', 'ae': 'ඇ', 'ai': 'ඈ', 'i': 'ඉ', 'ii': 'ඊ',
-            'u': 'උ', 'uu': 'ඌ', 'ru': 'ඍ', 'ruu': 'ඎ', 'lu': 'ඏ', 'luu': 'ඐ',
-            'e': 'එ', 'ee': 'ඒ', 'ei': 'ඓ', 'o': 'ඔ', 'oo': 'ඕ', 'au': 'ඖ',
-            'k': 'ක', 'kh': 'ඛ', 'g': 'ග', 'gh': 'ඝ', 'ng': 'ඞ',
-            'ch': 'ච', 'chh': 'ඡ', 'j': 'ජ', 'jh': 'ඣ', 'nj': 'ඤ',
-            'tt': 'ට', 'tth': 'ඨ', 'dd': 'ඩ', 'ddh': 'ඪ', 'nn': 'ණ',
-            'th': 'ත', 'thh': 'ථ', 'd': 'ද', 'dh': 'ධ', 'n': 'න',
-            'p': 'ප', 'ph': 'ඵ', 'b': 'බ', 'bh': 'භ', 'm': 'ම',
-            'y': 'ය', 'r': 'ර', 'l': 'ල', 'v': 'ව', 's': 'ස', 'sh': 'ශ', 'ss': 'ෂ',
-            'h': 'හ', 'l': 'ළ', 'z': 'ළු', '-': '-'
-        };
-
-        // Common words mapping for better translation
-        const commonWords = {
             'oyaata': 'ඔයාට',
             'kohomadha': 'කොහොමද',
             'machan': 'මචන්',
-            'meeting': 'meeting',
-            'eka': 'එක',
-            'zoom': 'zoom',
-            'e': 'එක',
-            'thx': 'Thx',
             'mata': 'මට',
             'help': 'help',
             'ekak': 'එකක්',
             'dhenna': 'දෙන්න',
-            'dhenn': 'දෙන්න',
             'mama': 'මම',
             'heta': 'හෙට',
-            'kandy': 'kandy',
             'ennam': 'එන්නම්',
-            'enna': 'එන්න',
             'ada': 'අද',
             'enne': 'එන්නේ',
             'nehe': 'නැහැ',
             'karunakarala': 'කරුණාකරලා',
             'methanata': 'මෙතනට',
+            'enna': 'එන්න',
             'kema': 'කෑම',
             'kewa': 'කෑවා',
             'eth': 'ඒත්',
@@ -228,22 +175,20 @@
             'sellam': 'සෙල්ලම්',
             'karanawa': 'කරනවා',
             'shape': 'ශේප්',
-            'eke': 'එකේ',
             'inna': 'ඉන්න',
             'loku': 'ලොකු',
-            'weda': 'වැඩ',
             'gihilla': 'ගිහිල්ලා',
+            'meeting': 'meeting',
             'ekata': 'එකට',
             'thiyenne': 'තියෙන්නේ',
             'meka': 'මේක',
             'rs': 'rs',
             'barayi': 'බරයි',
-            'asap': 'ASAP',
+            'ASAP': 'ASAP',
             'karala': 'කරලා',
-            'galle': 'Galle',
+            'Galle': 'Galle',
             'yanna': 'යන්න',
             'bus': 'bus',
-            'ekak': 'එකක්',
             'gannawa': 'ගන්නවා',
             'api': 'අපි',
             'giya': 'ගිය',
@@ -251,127 +196,78 @@
             'katha': 'කතා',
             'kala': 'කළා',
             'kiyala': 'කියලා',
-            'puluvandah': 'පුළුවන්ද',
-            'line': 'line',
-            'break': 'break',
-            'test': 'test',
-            'second': 'second',
+            'puLuvandah': 'පුළුවන්ද',
             'aluth': 'අලුත්',
-            'iphone': 'iPhone',
-            'ekak': 'එකක්',
+            'iPhone': 'iPhone',
             'gaththa': 'ගත්තා',
             'parissamen': 'පරිස්සමෙන්',
             'gihin': 'ගිහින්',
             'kohedha': 'කොහේද',
             'yanne': 'යන්නේ',
-            'weda': 'වැඩ',
             'katu': 'කටු',
-            'thiyenawa': 'තියෙනවා',
             'ow': 'ඔව්',
-            'dannawa': 'දන්නවා'
+            'dannawa': 'දන්නවා',
+            'thiyenawa': 'තියෙනවා',
+            'am': 'අම්',
+            'eka': 'එක',
+            'eke': 'එකේ'
         };
 
-        // English words to preserve (don't translate)
-        const preserveWords = ['iPhone', 'meeting', 'zoom', 'help', 'rs', 'ASAP', 'Galle', 'bus', 'line', 'break', 'test', 'second', 'kandy', 'k', 'Thx'];
-
-        let translationTimeout;
+        const inputText = document.getElementById('input-text');
+        const outputText = document.getElementById('output-text');
+        const clearBtn = document.querySelector('.clear-btn');
+        const copyBtn = document.querySelector('.copy-btn');
 
         function translateSinglishToSinhala(text) {
             if (!text.trim()) return '';
             
-            let result = text;
+            let translatedText = text;
             
-            // First replace common words (exact word matches)
-            Object.keys(commonWords).forEach(word => {
-                const regex = new RegExp(`\\b${word}\\b`, 'gi');
-                result = result.replace(regex, commonWords[word]);
-            });
+            // Sort keys by length (longest first) to handle partial matches correctly
+            const sortedKeys = Object.keys(singlishToSinhala).sort((a, b) => b.length - a.length);
             
-            // Then handle character-by-character translation for remaining parts
-            let translated = '';
-            for (let i = 0; i < result.length; i++) {
-                let char = result[i];
-                let found = false;
-                
-                // Check for preserve words first (case-sensitive)
-                let remainingText = result.substr(i);
-                let preserveMatch = null;
-                for (let word of preserveWords) {
-                    if (remainingText.startsWith(word)) {
-                        preserveMatch = word;
-                        break;
+            for (const key of sortedKeys) {
+                // Use word boundaries to avoid partial matches, but be more careful with case
+                const regex = new RegExp(`\\b${key}\\b`, 'gi');
+                translatedText = translatedText.replace(regex, (match) => {
+                    // Don't translate if it's all uppercase (like AM, ASAP, etc.)
+                    if (match === match.toUpperCase() && match.length > 1) {
+                        return match;
                     }
-                }
-                
-                if (preserveMatch) {
-                    translated += preserveMatch;
-                    i += preserveMatch.length - 1;
-                    found = true;
-                } else {
-                    // Check for multi-character combinations first
-                    if (i < result.length - 1) {
-                        let twoChar = result.substr(i, 2);
-                        if (singlishToSinhala[twoChar]) {
-                            translated += singlishToSinhala[twoChar];
-                            i++;
-                            found = true;
-                        }
-                    }
-                    
-                    // Check single character
-                    if (!found && singlishToSinhala[char]) {
-                        translated += singlishToSinhala[char];
-                    } else if (!found) {
-                        translated += char;
-                    }
-                }
+                    return singlishToSinhala[key];
+                });
             }
             
-            return translated;
+            return translatedText;
         }
 
-        function handleInput() {
-            clearTimeout(translationTimeout);
-            const inputText = document.getElementById('input-text').value;
-            const outputText = document.getElementById('output-text');
-            
-            // Add a small delay for real-time effect
-            translationTimeout = setTimeout(() => {
-                outputText.value = translateSinglishToSinhala(inputText);
-            }, 100);
+        function updateTranslation() {
+            const input = inputText.value;
+            const translation = translateSinglishToSinhala(input);
+            outputText.value = translation;
         }
 
-        function clearText() {
-            document.getElementById('input-text').value = '';
-            document.getElementById('output-text').value = '';
-            document.getElementById('input-text').focus();
-        }
+        inputText.addEventListener('input', updateTranslation);
 
-        function copyText() {
-            const outputText = document.getElementById('output-text');
-            outputText.select();
-            document.execCommand('copy');
-            
-            // Show feedback
-            const copyBtn = document.querySelector('.copy-btn');
-            const originalText = copyBtn.textContent;
-            copyBtn.textContent = 'Copied!';
-            setTimeout(() => {
-                copyBtn.textContent = originalText;
-            }, 2000);
-        }
-
-        // Event listeners
-        document.getElementById('input-text').addEventListener('input', handleInput);
-        document.getElementById('input-text').addEventListener('keyup', handleInput);
-        document.getElementById('input-text').addEventListener('paste', function() {
-            setTimeout(handleInput, 10);
+        clearBtn.addEventListener('click', () => {
+            inputText.value = '';
+            outputText.value = '';
+            inputText.focus();
         });
 
-        // Focus on input when page loads
-        window.onload = function() {
-            document.getElementById('input-text').focus();
-        };
+        copyBtn.addEventListener('click', () => {
+            if (outputText.value) {
+                navigator.clipboard.writeText(outputText.value).then(() => {
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copied!';
+                    copyBtn.style.backgroundColor = '#27ae60';
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                        copyBtn.style.backgroundColor = '#3498db';
+                    }, 2000);
+                });
+            }
+        });
     </script>
 </body>
 </html>
