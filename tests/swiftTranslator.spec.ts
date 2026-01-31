@@ -18,7 +18,7 @@ test.describe('SwiftTranslator Singlish to Sinhala Test Suite', () => {
         await page.waitForSelector(SELECTORS.inputArea, { state: 'visible' });
     });
 
-    // --- Part 1: Positive Test Cases (25) ---
+    // --- Part 1: Positive Test Cases (25) 
     const positiveTests = [
         { id: 'Pos_Fun_0001', input: 'oyaata kohomadha?', expected: 'ඔයාට කොහොමද?' },
         { id: 'Pos_Fun_0002', input: 'machan meeting eka zoom eke. Thx!', expected: 'මචන් meeting එක zoom එකේ. Thx!' },
@@ -67,7 +67,7 @@ test.describe('SwiftTranslator Singlish to Sinhala Test Suite', () => {
         });
     }
 
-    // --- Part 2: Negative Test Cases (10) ---
+    // --- Part 2: Negative Test Cases (10) 
     const negativeTests = [
         { id: 'Neg_Fun_0001', input: 'qwertyuiop', shouldNotTranslate: true },
         { id: 'Neg_Fun_0002', input: 'm ad n nh', shouldNotTranslate: true },
@@ -95,19 +95,18 @@ test.describe('SwiftTranslator Singlish to Sinhala Test Suite', () => {
                 return el.textContent;
             }, SELECTORS.outputArea);
 
-            // Negative tests should fail - the translator incorrectly translates invalid input
+            
             if (data.shouldNotTranslate) {
-                // These should FAIL because the translator should NOT translate but it does
-                // So we expect the output to be DIFFERENT from input (incorrect translation)
+               
                 expect(actualOutput).not.toBe(data.input);
             } else {
-                // For tests that should fail, expect a different output
+                
                 expect(actualOutput).not.toBe(data.input);
             }
         });
     }
 
-    // --- Part 3: UI Test Case ---
+    // --- Part 3: UI Test Case 
     test('Pos_UI_0001: Real-time Rendering and Clear Functionality', async ({ page }) => {
         await page.click(SELECTORS.inputArea);
         await page.keyboard.type('am', { delay: 100 });
